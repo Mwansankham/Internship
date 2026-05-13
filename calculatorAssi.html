@@ -98,7 +98,7 @@
             <button class="btn" onclick="append('3')">3</button>
             <button class="btn operator" onclick="append('+')">+</button>
 
-            <button class="btn" onclick="append('()')">()</button>
+            <button class="btn" onclick="addBracket()">()</button>
             <button class="btn" onclick="append('0')">0</button>
             <button class="btn" onclick="append('.')">.</button>
             <button class="btn equal" onclick="calculate()">=</button>
@@ -136,6 +136,15 @@
             updateDisplay();
         }
 
+        function addBracket() {
+            const openBrackets = (currentInput.match(/\(/g) || []).length;
+            const closeBrackets = (currentInput.match(/\)/g) || []).length;
+            if (openBrackets === closeBrackets || currentInput.endsWith('(')) {
+                append('(');
+            } else if (openBrackets > closeBrackets && !currentInput.endsWith(')')) {
+                 append(')');
+            }
+        }
         function calculate() {
             try {
                 let result = eval(currentInput.replace(/×/g, '*').replace(/÷/g, '/'));
