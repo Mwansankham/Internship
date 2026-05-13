@@ -139,18 +139,19 @@
         function addBracket() {
             const openBrackets = (currentInput.match(/\(/g) || []).length;
             const closeBrackets = (currentInput.match(/\)/g) || []).length;
-            if (openBrackets === closeBrackets || currentInput.endsWith('(')) {
-                append('(');
-            } else if (openBrackets > closeBrackets && !currentInput.endsWith(')')) {
-                 append(')');
+            if (openBrackets > closeBrackets) {
+                currentInput += ")";
+            }else {
+            currentInput += "(";  
             }
-        }
+            updateDisplay();  
+    }
         function calculate() {
             try {
                 let result = eval(currentInput.replace(/×/g, '*').replace(/÷/g, '/'));
                 currentInput = result.toString();
             } catch (e) {
-                currentInput = "Error";
+                currentInput = "Can't calculate";
             }
             updateDisplay();
         }
